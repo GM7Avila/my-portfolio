@@ -164,7 +164,7 @@ const Home = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
-              marginBottom: "auto",
+              marginTop: { xs: "0", xl: "auto" },
             }}
           >
             <Typography
