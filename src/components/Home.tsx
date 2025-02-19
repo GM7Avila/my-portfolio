@@ -15,14 +15,19 @@ const Home = () => {
       ? "rgba(255, 255, 255, 0.2)"
       : "rgba(0, 0, 0, 0.3)";
   return (
-    <Box sx={{ width: "100vw", px: { xs: "2em", sm: "3em", lg: "6em" } }}>
+    <Box
+      sx={{
+        width: "100vw",
+        px: { xs: "2em", sm: "3em", lg: "4em", xl: "5em" },
+      }}
+    >
       <Header />
       <Box
         sx={{
           height: "90vh",
           backgroundColor: "transparent",
           margin: "0",
-          py: { xs: "0em", sm: "6em" },
+          paddingTop: { xs: "0em", sm: "6em", md: "2em" },
         }}
       >
         {/*Page 1 - define as dimnesões da página*/}
@@ -33,7 +38,7 @@ const Home = () => {
             justifyContent: "space-between",
             alignItems: "center",
             height: "85%",
-            paddingLeft: { md: "1em", lg: "3em", xl: "6em" },
+            paddingLeft: { md: "1em", lg: "3em", xl: "10em" },
           }}
         >
           {/* Grid 1 - Hello World */}
@@ -53,7 +58,7 @@ const Home = () => {
                 paddingLeft: "0.2em",
                 paddingBottom: "0.4em",
                 paddingTop: { xs: "2em", sm: "0em" },
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: "center", md: "left" },
               }}
             >
               Hello World, I'm
@@ -62,7 +67,7 @@ const Home = () => {
               sx={{
                 margin: "0",
                 fontSize: { xs: "3em", sm: "3.5em", md: "5em" },
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: "center", md: "left" },
               }}
             >
               Guilherme
@@ -71,8 +76,8 @@ const Home = () => {
               sx={{
                 margin: "0",
                 paddingLeft: { xs: "0.6em", sm: "0em" },
-                fontSize: { xs: "2.3em", sm: "3.2em", md: "4.5em" },
-                textAlign: { xs: "center", sm: "left" },
+                fontSize: { xs: "2.3em", sm: "3em", md: "4.5em" },
+                textAlign: { xs: "center", md: "left" },
               }}
             >
               M. Avila <span className="wave">👋</span>{" "}
@@ -93,7 +98,6 @@ const Home = () => {
             <Box
               sx={{
                 paddingTop: { xs: "2em", sm: "3em" },
-                height: "50%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -159,23 +163,22 @@ const Home = () => {
 
           {/* Grid 3 - Description */}
           <Grid
-            size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
+            size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
-              marginTop: { xs: "0", xl: "auto" },
             }}
           >
             <Typography
               sx={{
                 paddingTop: { xs: "2em", sm: "0em" },
-                paddingRight: { xs: "2em", sm: "1.4em", md: "2em", lg: "3em" },
-                paddingLeft: { xs: "2em", sm: "0em" },
+                paddingRight: { xs: "2em", sm: "5em", md: "2em", lg: "3em" },
+                paddingLeft: { xs: "2em", sm: "5em", md: "0em" },
                 paddingBottom: { xs: "2em", sm: "0em" },
 
                 fontSize: { xs: "1.1em", md: "1.2em", lg: "1.5em" },
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: "center", md: "left" },
                 whiteSpace: "pre-line",
                 lineHeight: "1.8em",
               }}
@@ -187,13 +190,13 @@ const Home = () => {
 
           {/* Grid 4 - Social Media */}
           <Grid
-            size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
+            size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}
             sx={{
-              marginTop: { xs: "0em", md: "4em" },
+              marginTop: { xs: "0em", md: "2.5em" },
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: { xs: "0.15em", md: "2em" },
+              gap: { xs: "0.15em", sm: "1.5em", md: "2em" },
             }}
           >
             <Tooltip
