@@ -33,16 +33,17 @@ const Home = () => {
             justifyContent: "space-between",
             alignItems: "center",
             height: "85%",
-            paddingLeft: { md: 0, lg: "2em", xl: "5em" },
+            paddingLeft: { md: "1em", lg: "3em", xl: "6em" },
           }}
         >
-          {/* Text Box */}
+          {/* Grid 1 - Hello World */}
           <Grid
             size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              paddingBottom: { xs: "2em", sm: "0em" },
             }}
           >
             <Typography
@@ -60,7 +61,7 @@ const Home = () => {
             <Typography
               sx={{
                 margin: "0",
-                fontSize: { xs: "3em", sm: "2.5em", md: "5em" },
+                fontSize: { xs: "3em", sm: "3.5em", md: "5em" },
                 textAlign: { xs: "center", sm: "left" },
               }}
             >
@@ -70,32 +71,16 @@ const Home = () => {
               sx={{
                 margin: "0",
                 paddingLeft: { xs: "0.6em", sm: "0em" },
-                fontSize: { xs: "2.3em", sm: "2.5em", md: "4.5em" },
+                fontSize: { xs: "2.3em", sm: "3.2em", md: "4.5em" },
                 textAlign: { xs: "center", sm: "left" },
               }}
             >
               M. Avila <span className="wave">👋</span>{" "}
             </Typography>
-            <Typography
-              sx={{
-                paddingTop: { xs: "2em", md: "2em" },
-                paddingRight: { xs: "2em", sm: "1.4em", md: "2em" },
-                paddingLeft: { xs: "2em", sm: "0em" },
-                paddingBottom: { xs: "2em", sm: "0em" },
-
-                fontSize: { xs: "1.1em", md: "1.65em" },
-                textAlign: { xs: "center", sm: "left" },
-                whiteSpace: "pre-line",
-                lineHeight: "1.8em",
-              }}
-            >
-              Full Stack Developer, Computer Science Graduate, and dedicated to
-              building innovative digital experiences.
-            </Typography>
           </Grid>
-          {/* Grid Image Box */}
+
+          {/* Grid 2 - Image Box */}
           <Grid
-            container
             size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
             sx={{
               display: "flex",
@@ -137,8 +122,8 @@ const Home = () => {
                     borderRadius: "50%",
                     backgroundColor: circleColor,
                     position: "absolute",
-                    top: "-1.5em",
-                    left: "-1.5em",
+                    top: { xs: "-0.75em", md: "-1.1em" },
+                    left: { xs: "-0.85em", md: "-1.5em" },
                     zIndex: 0,
                   }}
                 />
@@ -150,8 +135,8 @@ const Home = () => {
                     borderRadius: "50%",
                     backgroundColor: circleColor,
                     position: "absolute",
-                    top: "1.5em",
-                    left: "1.5em",
+                    top: { xs: "0.55em", md: "1.1em" },
+                    left: { xs: "0.55em", md: "1.3em" },
                     zIndex: 0,
                   }}
                 />
@@ -169,137 +154,169 @@ const Home = () => {
                   }}
                 />
               </Box>
-              {/* Social Media */}
-              <Box
+            </Box>
+          </Grid>
+
+          {/* Grid 3 - Description */}
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              marginBottom: "auto",
+            }}
+          >
+            <Typography
+              sx={{
+                paddingTop: { xs: "2em", sm: "0em" },
+                paddingRight: { xs: "2em", sm: "1.4em", md: "2em", lg: "3em" },
+                paddingLeft: { xs: "2em", sm: "0em" },
+                paddingBottom: { xs: "2em", sm: "0em" },
+
+                fontSize: { xs: "1.1em", md: "1.2em", lg: "1.5em" },
+                textAlign: { xs: "center", sm: "left" },
+                whiteSpace: "pre-line",
+                lineHeight: "1.8em",
+              }}
+            >
+              Full Stack Developer, Computer Science Graduate, and dedicated to
+              building innovative digital experiences.
+            </Typography>
+          </Grid>
+
+          {/* Grid 4 - Social Media */}
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
+            sx={{
+              marginTop: { xs: "0em", md: "4em" },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: { xs: "0.15em", md: "2em" },
+            }}
+          >
+            <Tooltip
+              title={
+                <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
+                  GitHub
+                </Typography>
+              }
+              placement="bottom"
+            >
+              <a
+                href="https://github.com/GM7Avila"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton
+                  disableRipple
+                  sx={{
+                    "&:hover svg": {
+                      color: "#e974fc",
+                    },
+                  }}
+                >
+                  <GitHubIcon
+                    sx={{
+                      fontSize: { xs: "1.2em", md: "1.6em" },
+                      color: "inherit",
+                      transition: "color 0.2s ease",
+                    }}
+                  />
+                </IconButton>
+              </a>
+            </Tooltip>
+
+            <Tooltip
+              title={
+                <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
+                  LinkedIn
+                </Typography>
+              }
+              placement="bottom"
+            >
+              <a
+                href="https://www.linkedin.com/in/avila-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton
+                  disableRipple
+                  sx={{
+                    "&:hover svg": {
+                      color: "#7d74fc",
+                    },
+                  }}
+                >
+                  <LinkedInIcon
+                    sx={{
+                      fontSize: { xs: "1.2em", md: "1.6em" },
+                      color: "inherit",
+                      transition: "color 0.2s ease",
+                    }}
+                  />
+                </IconButton>
+              </a>
+            </Tooltip>
+
+            <Tooltip
+              title={
+                <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
+                  Twitter
+                </Typography>
+              }
+              placement="bottom"
+            >
+              <a
+                href="https://x.com/gavila_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton
+                  disableRipple
+                  sx={{
+                    "&:hover svg": {
+                      color: "#74d1fc",
+                    },
+                  }}
+                >
+                  <XIcon
+                    sx={{
+                      fontSize: { xs: "1.2em", md: "1.6em" },
+                      color: "inherit",
+                      transition: "color 0.2s ease",
+                    }}
+                  />
+                </IconButton>
+              </a>
+            </Tooltip>
+
+            <Tooltip
+              title={
+                <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
+                  Curriculum
+                </Typography>
+              }
+              placement="bottom"
+            >
+              <IconButton
+                disableRipple
                 sx={{
-                  marginTop: { xs: "3em", md: "4em" },
-                  display: "flex",
-                  gap: { xs: "0.15em", md: "2em" },
+                  "&:hover svg": {
+                    color: "#74fcb3",
+                  },
                 }}
               >
-                <Tooltip
-                  title={
-                    <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
-                      GitHub
-                    </Typography>
-                  }
-                  placement="bottom"
-                >
-                  <a
-                    href="https://github.com/GM7Avila"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IconButton
-                      disableRipple
-                      sx={{
-                        "&:hover svg": {
-                          color: "#e974fc",
-                        },
-                      }}
-                    >
-                      <GitHubIcon
-                        sx={{
-                          fontSize: { xs: "1.2em", md: "1.6em" },
-                          color: "inherit",
-                          transition: "color 0.2s ease",
-                        }}
-                      />
-                    </IconButton>
-                  </a>
-                </Tooltip>
-
-                <Tooltip
-                  title={
-                    <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
-                      LinkedIn
-                    </Typography>
-                  }
-                  placement="bottom"
-                >
-                  <a
-                    href="https://www.linkedin.com/in/avila-dev/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IconButton
-                      disableRipple
-                      sx={{
-                        "&:hover svg": {
-                          color: "#7d74fc",
-                        },
-                      }}
-                    >
-                      <LinkedInIcon
-                        sx={{
-                          fontSize: { xs: "1.2em", md: "1.6em" },
-                          color: "inherit",
-                          transition: "color 0.2s ease",
-                        }}
-                      />
-                    </IconButton>
-                  </a>
-                </Tooltip>
-
-                <Tooltip
-                  title={
-                    <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
-                      Twitter
-                    </Typography>
-                  }
-                  placement="bottom"
-                >
-                  <a
-                    href="https://x.com/gavila_dev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <IconButton
-                      disableRipple
-                      sx={{
-                        "&:hover svg": {
-                          color: "#74d1fc",
-                        },
-                      }}
-                    >
-                      <XIcon
-                        sx={{
-                          fontSize: { xs: "1.2em", md: "1.6em" },
-                          color: "inherit",
-                          transition: "color 0.2s ease",
-                        }}
-                      />
-                    </IconButton>
-                  </a>
-                </Tooltip>
-
-                <Tooltip
-                  title={
-                    <Typography sx={{ fontSize: { xs: "1em", md: "1.5em" } }}>
-                      Curriculum
-                    </Typography>
-                  }
-                  placement="bottom"
-                >
-                  <IconButton
-                    disableRipple
-                    sx={{
-                      "&:hover svg": {
-                        color: "#74fcb3",
-                      },
-                    }}
-                  >
-                    <ContactPageIcon
-                      sx={{
-                        fontSize: { xs: "1.2em", md: "1.6em" },
-                        color: "inherit",
-                        transition: "color 0.2s ease",
-                      }}
-                    />
-                  </IconButton>
-                </Tooltip>
-              </Box>
-            </Box>
+                <ContactPageIcon
+                  sx={{
+                    fontSize: { xs: "1.2em", md: "1.6em" },
+                    color: "inherit",
+                    transition: "color 0.2s ease",
+                  }}
+                />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
       </Box>
