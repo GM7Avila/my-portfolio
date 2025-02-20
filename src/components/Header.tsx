@@ -12,130 +12,125 @@ export default function Header() {
   const { theme } = useThemeContext();
 
   return (
-    <Box
+    <AppBar
+      position="fixed"
+      elevation={0}
       sx={{
-        backgroundColor: "transparent",
+        backgroundColor: theme.palette.background.default,
+        backdropFilter: "blur(10px)",
         width: "100%",
-        maxHeight: "10vh",
-        py: { xs: "0.8em", sm: "1.5em", md: "2em" },
-        height: "10vh",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: theme.zIndex.drawer + 1,
+        transition: "all 0.3s ease-in-out",
       }}
     >
-      <AppBar
-        position="static"
-        elevation={0}
+      <Toolbar
         sx={{
-          backgroundColor: "transparent",
-          boxShadow: "none",
-          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          px: { xs: "1rem", md: "2rem", lg: "4rem", xl: "14rem" },
+          minHeight: { xs: "10vh !important", md: "12vh !important" },
         }}
       >
-        <Toolbar
+        {/* Logo @GM7Avia */}
+        <Box sx={{ position: "relative" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontFamily: "Zilla Slab Highlight",
+              backgroundColor:
+                theme.palette.mode === "dark" ? "#E5E5E5" : "#5F5F5F",
+              color: theme.palette.mode === "dark" ? "#212121" : "#fff",
+              fontSize: { xs: "1.15rem", sm: "1.3rem", md: "1.4rem" },
+              px: "0.5rem",
+            }}
+          >
+            @GM7Avila
+          </Typography>
+        </Box>
+
+        {/* Desktop Navbar - sm+ */}
+        <Box
           sx={{
-            "&.MuiToolbar-root": {
-              bgcolor: "transparent !important",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              px: "0px",
-            },
+            display: { xs: "none", sm: "flex" },
+            gap: { sm: "3em", md: "6em" },
+            alignItems: "center",
+            fontSize: { sm: "0.8rem", md: "1rem" },
           }}
         >
-          {/* Logo @GM7Avia */}
-          <Box>
+          <Link
+            sx={{
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ fontFamily: "mate-regular", color: "text.secondary" }}
+            >
+              About
+            </Typography>
+          </Link>
+
+          <Link
+            sx={{
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ fontFamily: "mate-regular", color: "text.secondary" }}
+            >
+              Portfolio
+            </Typography>
+          </Link>
+
+          <Link
+            sx={{
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
             <Typography
               variant="h6"
               sx={{
-                fontFamily: "Zilla Slab Highlight",
-                backgroundColor:
-                  theme.palette.mode === "dark" ? "#E5E5E5" : "#5F5F5F",
-                color: theme.palette.mode === "dark" ? "#212121" : "#fff",
-                fontSize: { xs: "1.15rem", sm: "1.3rem", md: "1.4rem" },
-                px: "0.5rem",
+                fontFamily: "mate-regular",
+                color: "text.secondary",
               }}
             >
-              @GM7Avila
+              Contact
             </Typography>
-          </Box>
-          {/* Desktop Navbar - sm+ */}
-          <Box
+          </Link>
+          <NightModeToggle />
+        </Box>
+
+        {/* Mobile - xs */}
+        <Box sx={{ display: { xs: "flex", sm: "none" }, gap: "2em" }}>
+          <NightModeToggle />
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
             sx={{
-              display: { xs: "none", sm: "flex" },
-              gap: { sm: "3em", md: "6em" },
-              alignItems: "center",
-              fontSize: { sm: "0.8rem", md: "1rem" },
+              display: { xs: "flex", sm: "none" },
+              color: "#5F5F5F",
+              scale: "1.1",
+              border: "none",
+              outline: "none",
+              "&:focus": { outline: "none" },
+              "&:focusVisible": { outline: "none" },
+              "&:active": { border: "none" },
             }}
           >
-            <Link
-              sx={{
-                color: "inherit",
-                cursor: "pointer",
-              }}
-            >
-              <Typography
-                variant="h6"
-                sx={{ fontFamily: "mate-regular", color: "text.secondary" }}
-              >
-                About
-              </Typography>
-            </Link>
-
-            <Link
-              sx={{
-                color: "inherit",
-                cursor: "pointer",
-              }}
-            >
-              <Typography
-                variant="h6"
-                sx={{ fontFamily: "mate-regular", color: "text.secondary" }}
-              >
-                Portifolio
-              </Typography>
-            </Link>
-
-            <Link
-              sx={{
-                color: "inherit",
-                cursor: "pointer",
-              }}
-            >
-              <Typography
-                variant="h6"
-                sx={{
-                  fontFamily: "mate-regular",
-                  color: "text.secondary",
-                }}
-              >
-                Contact
-              </Typography>
-            </Link>
-            <NightModeToggle />
-          </Box>
-          {/* Mobile - xs */}
-          <Box sx={{ display: { xs: "flex", sm: "none" }, gap: "2em" }}>
-            <NightModeToggle />
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{
-                display: { xs: "flex", sm: "none" },
-                color: "#5F5F5F",
-                scale: "1.1",
-                border: "none",
-                outline: "none",
-                "&:focus": { outline: "none" },
-                "&:focusVisible": { outline: "none" },
-                "&:active": { border: "none" },
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            <MenuIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }

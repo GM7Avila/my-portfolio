@@ -1,4 +1,4 @@
-import { createTheme, Theme } from "@mui/material";
+import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createContext, FC, PropsWithChildren, useContext } from "react";
 import { useColorTheme } from "./use-color-theme";
 
@@ -17,7 +17,12 @@ export const ThemeContext = createContext<ThemeContextType>({
 export const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const value = useColorTheme();
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>
+      <ThemeProvider theme={value.theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 };
 
