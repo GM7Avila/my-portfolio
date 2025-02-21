@@ -472,13 +472,21 @@ const Home = () => {
       <Grid
         container
         sx={{
-          mt: "10vh", // compensar o header
+          mt: "14vh",
+          mb: "5em",
           minHeight: "75vh",
           width: "100%",
-          paddingLeft: { md: "1em", lg: "3em", xl: "8em" },
         }}
       >
-        <Grid size={{ xs: 12, md: 6, lg: 6, xl: 6 }} sx={{ mt: "0.2em" }}>
+        <Grid
+          size={{ xs: 12, md: 12, lg: 6, xl: 6 }}
+          sx={{
+            mt: { md: "0em", lg: "4em", xl: "4em" },
+            display: "flex",
+            flexDirection: "column",
+            paddingLeft: { md: "1em", lg: "3em", xl: "4em" },
+          }}
+        >
           <Typography
             style={{
               fontSize: "2em",
@@ -489,9 +497,14 @@ const Home = () => {
           </Typography>
 
           <Box sx={{ alignItems: "center", marginTop: "2.5em" }}>
-            <Typography sx={{ fontSize: { xs: "1.2em", sm: "1.5em" } }}>
-              🎓 Mechatronics Technician
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
+                🎓
+              </Typography>
+              <Typography sx={{ fontSize: { xs: "1.2em", sm: "1.5em" } }}>
+                Mechatronics Technician
+              </Typography>
+            </Box>
             <Typography
               sx={{
                 fontSize: { xs: "1em", sm: "1.25em" },
@@ -503,9 +516,15 @@ const Home = () => {
           </Box>
 
           <Grid sx={{ marginTop: "1em" }}>
-            <Typography style={{ fontSize: "1.5em" }}>
-              🎓 Computer Science Graduate
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
+                🎓
+              </Typography>
+              <Typography style={{ fontSize: "1.5em" }}>
+                Computer Science Graduate
+              </Typography>
+            </Box>
+
             <Typography
               style={{
                 fontSize: "1.25em",
@@ -525,12 +544,18 @@ const Home = () => {
             Experiences
           </Typography>
           <Grid sx={{ marginTop: "1.5em" }}>
-            <Typography style={{ fontSize: "1.5em" }}>
-              💼 Backend Java Developer
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography style={{ fontSize: "1.25em", marginRight: "0.5em" }}>
+                💼
+              </Typography>
+              <Typography style={{ fontSize: "1.5em" }}>
+                Backend Java Developer
+              </Typography>
+            </Box>
+
             <Typography
               style={{
-                fontSize: "1.25em",
+                fontSize: "1.20em",
                 color: theme.palette.text.secondary,
               }}
             >
@@ -538,9 +563,14 @@ const Home = () => {
             </Typography>
           </Grid>
           <Grid sx={{ marginTop: "1em" }}>
-            <Typography style={{ fontSize: "1.5em" }}>
-              💼 Full Stack Developer & Data Scientist
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography style={{ fontSize: "1.25em", marginRight: "0.5em" }}>
+                💼
+              </Typography>
+              <Typography style={{ fontSize: "1.5em" }}>
+                Full Stack Developer & Data Scientist
+              </Typography>
+            </Box>
             <Typography
               style={{
                 fontSize: "1.25em",
@@ -551,91 +581,72 @@ const Home = () => {
             </Typography>
           </Grid>
         </Grid>
+
         <Grid
           container
-          size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
+          size={{ xs: 12, md: 12, lg: 6, xl: 6 }}
+          spacing={2}
           sx={{
-            mb: "3em",
-            mt: { xs: "2em", md: "0" },
+            mt: { xs: "5em", lg: "0" },
             display: "flex",
+            px: 2,
             justifyContent: "center",
           }}
         >
-          <Grid sx={{ mt: { xs: 6, md: 0 } }} size={12}>
-            <Typography
+          {languages.map((tech, index) => (
+            <Grid
+              size={{ xs: 6, sm: 4, md: 3, lg: 3 }}
+              key={index}
               sx={{
-                fontSize: "2em",
-                textDecoration: "underline",
-                marginBottom: "1em",
+                minWidth: { xs: 120, sm: 140 },
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              Tech Skills
-            </Typography>
-          </Grid>
-
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              px: 2,
-              justifyContent: { xs: "center", md: "flex-start" },
-            }}
-          >
-            {languages.map((tech, index) => (
-              <Grid
-                size={{ xs: 6, sm: 4, md: 3, lg: 3 }}
-                key={index}
+              <Box
                 sx={{
-                  minWidth: { xs: 120, sm: 140 },
+                  p: { xs: 0.5, sm: 1.5 },
+                  minHeight: { xs: 125, sm: 130, xl: 80 },
+                  width: "100%",
+                  borderRadius: 2,
+                  boxShadow: 2,
                   display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                   justifyContent: "center",
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    transform: "scale(1.03)",
+                    boxShadow: 4,
+                  },
+                  bgcolor: theme.palette.cardBackground,
                 }}
               >
                 <Box
                   sx={{
-                    p: { xs: 1, sm: 1.5 },
-                    minHeight: { xs: 80, sm: 100 },
-                    width: "100%",
-                    borderRadius: 2,
-                    boxShadow: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "all 0.2s ease",
-                    "&:hover": {
-                      transform: "scale(1.03)",
-                      boxShadow: 4,
-                    },
-                    bgcolor: theme.palette.cardBackground,
+                    fontSize: { xs: 24, sm: 25 },
+                    color:
+                      theme.palette.mode === "dark"
+                        ? "primary.light"
+                        : "primary.dark",
+                    mb: 0.5,
                   }}
                 >
-                  <Box
-                    sx={{
-                      fontSize: { xs: 24, sm: 32 },
-                      color:
-                        theme.palette.mode === "dark"
-                          ? "primary.light"
-                          : "primary.dark",
-                      mb: 0.5,
-                    }}
-                  >
-                    {getTechIcon(tech.name)}
-                  </Box>
-
-                  <Typography
-                    sx={{
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      fontSize: { xs: "0.9rem", sm: "1rem" },
-                    }}
-                  >
-                    {tech.name}
-                  </Typography>
+                  {getTechIcon(tech.name)}
                 </Box>
-              </Grid>
-            ))}
-          </Grid>
+
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                  }}
+                >
+                  {tech.name}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Box>
