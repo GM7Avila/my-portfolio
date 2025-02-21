@@ -1,4 +1,11 @@
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Divider,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import "../App.css";
 import Header from "./Header";
 import Grid from "@mui/material/Grid2";
@@ -6,10 +13,11 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import XIcon from "@mui/icons-material/X";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTheme } from "@mui/material/styles";
 
 import {
-  SiSpringboot,
+  SiSpring,
   SiMui,
   SiDotnet,
   SiReact,
@@ -27,13 +35,14 @@ import {
 
 import { TbBrandCSharp } from "react-icons/tb";
 import { FaJava } from "react-icons/fa";
+import { useState } from "react";
 
 const getTechIcon = (techName: string) => {
   const iconStyle = { fontSize: "1.5em" };
 
   switch (techName) {
-    case "Spring Boot":
-      return <SiSpringboot style={iconStyle} />;
+    case "Spring":
+      return <SiSpring style={iconStyle} />;
     case "ASP.NET":
       return <SiDotnet style={iconStyle} />;
     case "React":
@@ -78,7 +87,7 @@ type LanguageType = {
 
 const languages: LanguageType[] = [
   { name: "Java", category: "Backend", proficiency: 3 },
-  { name: "Spring Boot", category: "Backend", proficiency: 3 },
+  { name: "Spring", category: "Backend", proficiency: 3 },
   { name: "C#", category: "Backend", proficiency: 3 },
   { name: "ASP.NET", category: "Backend", proficiency: 3 },
   { name: "React", category: "Frontend", proficiency: 3 },
@@ -95,90 +104,8 @@ const languages: LanguageType[] = [
   { name: "Github", category: "DevOps", proficiency: 3 },
 ];
 
-// Adicione no início do arquivo
-import { useState } from "react";
-
-const SkillCard = ({ tech, theme }: { tech: LanguageType; theme: any }) => {
-  const [position, setPosition] = useState({ x: 50, y: 50 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setPosition({ x, y });
-  };
-
-  return (
-    <Box
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      sx={{
-        p: { xs: 0.5, sm: 1.5 },
-        minHeight: { xs: 125, sm: 130, xl: 80 },
-        width: "100%",
-        borderRadius: 2,
-        boxShadow: "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "all 0.2s ease",
-        position: "relative",
-        overflow: "hidden",
-        "&:hover": {
-          transform: "scale(1.03)",
-          boxShadow: "rgba(3, 102, 214, 0.5) 0px 0px 0px 3px",
-        },
-        bgcolor: theme.palette.cardBackground,
-      }}
-    >
-      {/* Efeito de brilho */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: isHovered
-            ? `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)`
-            : "none",
-          pointerEvents: "none",
-          transition: "background 0.3s ease",
-        }}
-      />
-
-      <Box
-        sx={{
-          fontSize: { xs: 24, sm: 25 },
-          color:
-            theme.palette.mode === "dark" ? "primary.light" : "primary.dark",
-          mb: 0.5,
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        {getTechIcon(tech.name)}
-      </Box>
-
-      <Typography
-        sx={{
-          fontWeight: "bold",
-          textAlign: "center",
-          fontSize: { xs: "0.9rem", sm: "1rem" },
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        {tech.name}
-      </Typography>
-    </Box>
-  );
-};
-
 const Home = () => {
+  const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
   const circleColor = theme.palette.mode === "dark" ? "#42414c" : "#d4d4d8";
 
@@ -558,7 +485,7 @@ const Home = () => {
         }}
       >
         <Grid
-          size={{ xs: 12, md: 12, lg: 6, xl: 6 }}
+          size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
           sx={{
             mt: { md: "0em", lg: "4em", xl: "4em" },
             display: "flex",
@@ -630,38 +557,102 @@ const Home = () => {
               textDecoration: "underline",
             }}
           >
-            Experiences
+            Experiences{" "}
+            <Tooltip placement="top" title="Expand">
+              <IconButton
+                onClick={() => setExpanded((prev) => !prev)}
+                sx={{
+                  ml: 1,
+                  transform: expanded ? "rotate(180deg)" : "rotate(0)",
+                  transition: "transform 0.2s",
+                }}
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </Tooltip>
           </Typography>
-          <Grid sx={{ marginTop: "1.5em" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Grid sx={{ marginTop: "2.5em" }}>
+            <Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1em", sm: "1.25em" },
+                    marginRight: "0.5em",
+                  }}
+                >
+                  💼
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1.1em", sm: "1.5em" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Backend Java Developer
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={{ display: "flex", mt: 1 }}>
+              <Box
+                sx={{
+                  borderLeft: "1px solid #ccc",
+                  mr: 2,
+                }}
+              />
               <Typography
                 sx={{
                   fontSize: { xs: "1em", sm: "1.25em" },
-                  marginRight: "0.5em",
-                }}
-              >
-                💼
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: "1.1em", sm: "1.5em" },
+                  color: theme.palette.text.secondary,
                   fontWeight: "bold",
                 }}
               >
-                Backend Java Developer
+                Rmax (2022-2023)
               </Typography>
             </Box>
 
-            <Typography
-              sx={{
-                fontSize: { xs: "1em", sm: "1.25em" },
-                color: theme.palette.text.secondary,
-              }}
-            >
-              RMAX (2022-2023)
-            </Typography>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <Box sx={{ display: "flex", mb: 5 }}>
+                <Box
+                  sx={{
+                    borderLeft: "1px solid #ccc",
+                    mr: 2,
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: { xs: "0.85em", sm: "1em" },
+                    mt: 1,
+                    mb: 2,
+                    paddingRight: "10em",
+                    color: "text.secondary",
+                  }}
+                >
+                  Experience in developing{" "}
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      backgroundColor: circleColor,
+                    }}
+                  >
+                    RESTful APIs
+                  </span>
+                  using the{" "}
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      backgroundColor: circleColor,
+                    }}
+                  >
+                    Spring Framework
+                  </span>
+                  , with a focus on security, JWT authentication, user services,
+                  and best coding practices.
+                </Typography>
+              </Box>
+            </Collapse>
           </Grid>
-          <Grid sx={{ marginTop: "1em" }}>
+          <Grid sx={{ marginTop: "2em" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
                 sx={{
@@ -680,23 +671,82 @@ const Home = () => {
                 Full Stack Dev. & Data Scientist
               </Typography>
             </Box>
-            <Typography
-              sx={{
-                fontSize: { xs: "1em", sm: "1.25em" },
-                color: theme.palette.text.secondary,
-              }}
-            >
-              FuzzyLab (2024)
-            </Typography>
+            <Box sx={{ display: "flex", mt: 1 }}>
+              <Box
+                sx={{
+                  borderLeft: "1px solid #ccc",
+                  mr: 2,
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: { xs: "1em", sm: "1.25em" },
+                  color: theme.palette.text.secondary,
+                  fontWeight: "bold",
+                }}
+              >
+                FuzzyLab (2024)
+              </Typography>
+            </Box>
           </Grid>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Box sx={{ display: "flex", mb: 5 }}>
+              <Box
+                sx={{
+                  borderLeft: "1px solid #ccc",
+                  mr: 2,
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: { xs: "0.85em", sm: "1em" },
+                  mt: 1,
+                  mb: 2,
+                  paddingRight: "10em",
+                  color: "text.secondary",
+                }}
+              >
+                Experience in Web Development with{" "}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    backgroundColor: circleColor,
+                  }}
+                >
+                  React and Django REST Framework
+                </span>{" "}
+                . Skilled in implementing{" "}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    backgroundColor: circleColor,
+                  }}
+                >
+                  Machine Learning
+                </span>{" "}
+                algorithms,{" "}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    backgroundColor: circleColor,
+                  }}
+                >
+                  Data Analysis
+                </span>
+                , and developing web systems applied to Artificial Intelligence
+                Engineering.
+              </Typography>
+            </Box>
+          </Collapse>
         </Grid>
 
         <Grid
           container
-          size={{ xs: 12, md: 12, lg: 6, xl: 6 }}
-          spacing={2}
+          size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
+          spacing={1}
+          position={"sticky"}
           sx={{
-            mt: { xs: "5em", lg: "0" },
+            mt: { xs: "3em", lg: "0" },
             display: "flex",
             px: 2,
             justifyContent: "center",
@@ -716,6 +766,7 @@ const Home = () => {
                 sx={{
                   p: { xs: 0.5, sm: 1.5 },
                   minHeight: { xs: 125, sm: 130, xl: 80 },
+                  maxHeight: { xs: 150, sm: 160, xl: 190 },
                   width: "100%",
                   borderRadius: 2,
                   boxShadow:
