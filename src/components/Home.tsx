@@ -95,12 +95,92 @@ const languages: LanguageType[] = [
   { name: "Github", category: "DevOps", proficiency: 3 },
 ];
 
+// Adicione no início do arquivo
+import { useState } from "react";
+
+const SkillCard = ({ tech, theme }: { tech: LanguageType; theme: any }) => {
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setPosition({ x, y });
+  };
+
+  return (
+    <Box
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      sx={{
+        p: { xs: 0.5, sm: 1.5 },
+        minHeight: { xs: 125, sm: 130, xl: 80 },
+        width: "100%",
+        borderRadius: 2,
+        boxShadow: "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        transition: "all 0.2s ease",
+        position: "relative",
+        overflow: "hidden",
+        "&:hover": {
+          transform: "scale(1.03)",
+          boxShadow: "rgba(3, 102, 214, 0.5) 0px 0px 0px 3px",
+        },
+        bgcolor: theme.palette.cardBackground,
+      }}
+    >
+      {/* Efeito de brilho */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: isHovered
+            ? `radial-gradient(circle at ${position.x}% ${position.y}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)`
+            : "none",
+          pointerEvents: "none",
+          transition: "background 0.3s ease",
+        }}
+      />
+
+      <Box
+        sx={{
+          fontSize: { xs: 24, sm: 25 },
+          color:
+            theme.palette.mode === "dark" ? "primary.light" : "primary.dark",
+          mb: 0.5,
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {getTechIcon(tech.name)}
+      </Box>
+
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          textAlign: "center",
+          fontSize: { xs: "0.9rem", sm: "1rem" },
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {tech.name}
+      </Typography>
+    </Box>
+  );
+};
+
 const Home = () => {
   const theme = useTheme();
-  const circleColor =
-    theme.palette.mode === "dark"
-      ? "rgba(255, 255, 255, 0.2)"
-      : "rgba(0, 0, 0, 0.3)";
+  const circleColor = theme.palette.mode === "dark" ? "#42414c" : "#d4d4d8";
 
   return (
     /* Moldura */
@@ -254,7 +334,6 @@ const Home = () => {
                   zIndex: 0,
                   animation: "pulse 2s ease-in-out infinite",
                   transformOrigin: "center center",
-                  // Adicione um delay para variar a animação
                   animationDelay: "0.5s",
                 }}
               />
@@ -452,16 +531,16 @@ const Home = () => {
           <Box
             key={index}
             sx={{
-              width: { xs: 5, sm: 7 }, // Tamanho responsivo
+              width: { xs: 5, sm: 7 },
               height: { xs: 6, sm: 8 },
               borderRadius: "50%",
               bgcolor: (theme) =>
                 theme.palette.mode === "dark"
-                  ? "rgba(255, 255, 255, 0.4)"
+                  ? "rgba(255, 255, 255, 0.3)"
                   : "rgba(0, 0, 0, 0.3)",
               transition: "all 0.3s ease",
               "&:hover": {
-                transform: "scale(1.2)",
+                transform: "scale(1.25)",
                 bgcolor: (theme) => theme.palette.text.secondary,
               },
             }}
@@ -488,8 +567,8 @@ const Home = () => {
           }}
         >
           <Typography
-            style={{
-              fontSize: "2em",
+            sx={{
+              fontSize: { xs: "1.4em", sm: "1.8em" },
               textDecoration: "underline",
             }}
           >
@@ -501,7 +580,12 @@ const Home = () => {
               <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
                 🎓
               </Typography>
-              <Typography sx={{ fontSize: { xs: "1.2em", sm: "1.5em" } }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1.1em", sm: "1.5em" },
+                  fontWeight: "bold",
+                }}
+              >
                 Mechatronics Technician
               </Typography>
             </Box>
@@ -520,14 +604,19 @@ const Home = () => {
               <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
                 🎓
               </Typography>
-              <Typography style={{ fontSize: "1.5em" }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1.1em", sm: "1.5em" },
+                  fontWeight: "bold",
+                }}
+              >
                 Computer Science Graduate
               </Typography>
             </Box>
 
             <Typography
-              style={{
-                fontSize: "1.25em",
+              sx={{
+                fontSize: { xs: "1em", sm: "1.25em" },
                 color: theme.palette.text.secondary,
               }}
             >
@@ -535,8 +624,8 @@ const Home = () => {
             </Typography>
           </Grid>
           <Typography
-            style={{
-              fontSize: "2em",
+            sx={{
+              fontSize: { xs: "1.4em", sm: "1.8em" },
               marginTop: "2.2em",
               textDecoration: "underline",
             }}
@@ -545,17 +634,27 @@ const Home = () => {
           </Typography>
           <Grid sx={{ marginTop: "1.5em" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography style={{ fontSize: "1.25em", marginRight: "0.5em" }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1em", sm: "1.25em" },
+                  marginRight: "0.5em",
+                }}
+              >
                 💼
               </Typography>
-              <Typography style={{ fontSize: "1.5em" }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1.1em", sm: "1.5em" },
+                  fontWeight: "bold",
+                }}
+              >
                 Backend Java Developer
               </Typography>
             </Box>
 
             <Typography
-              style={{
-                fontSize: "1.20em",
+              sx={{
+                fontSize: { xs: "1em", sm: "1.25em" },
                 color: theme.palette.text.secondary,
               }}
             >
@@ -564,16 +663,26 @@ const Home = () => {
           </Grid>
           <Grid sx={{ marginTop: "1em" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography style={{ fontSize: "1.25em", marginRight: "0.5em" }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1em", sm: "1.25em" },
+                  marginRight: "0.5em",
+                }}
+              >
                 💼
               </Typography>
-              <Typography style={{ fontSize: "1.5em" }}>
-                Full Stack Developer & Data Scientist
+              <Typography
+                sx={{
+                  fontSize: { xs: "0.9em", sm: "1.5em" },
+                  fontWeight: "bold",
+                }}
+              >
+                Full Stack Dev. & Data Scientist
               </Typography>
             </Box>
             <Typography
-              style={{
-                fontSize: "1.25em",
+              sx={{
+                fontSize: { xs: "1em", sm: "1.25em" },
                 color: theme.palette.text.secondary,
               }}
             >
@@ -598,7 +707,7 @@ const Home = () => {
               size={{ xs: 6, sm: 4, md: 3, lg: 3 }}
               key={index}
               sx={{
-                minWidth: { xs: 120, sm: 140 },
+                minWidth: { xs: 100, sm: 140 },
                 display: "flex",
                 justifyContent: "center",
               }}
@@ -609,7 +718,8 @@ const Home = () => {
                   minHeight: { xs: 125, sm: 130, xl: 80 },
                   width: "100%",
                   borderRadius: 2,
-                  boxShadow: 2,
+                  boxShadow:
+                    "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -617,7 +727,8 @@ const Home = () => {
                   transition: "all 0.2s ease",
                   "&:hover": {
                     transform: "scale(1.03)",
-                    boxShadow: 4,
+                    boxShadow:
+                      "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
                   },
                   bgcolor: theme.palette.cardBackground,
                 }}

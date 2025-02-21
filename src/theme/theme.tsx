@@ -1,5 +1,5 @@
 import { PaletteMode } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const theme = {
   palette: {
@@ -22,7 +22,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             primary: grey[800],
             secondary: grey[700],
           },
-          cardBackground: grey[200],
+          cardBackground: "#f9f9f9",
         }
       : {
           // palette values for dark mode
@@ -36,7 +36,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             primary: "#fff",
             secondary: grey[400],
           },
-          cardBackground: grey[800],
+          cardBackground: "#42414c",
         }),
   },
   typography: {
@@ -50,6 +50,13 @@ export const getDesignTokens = (mode: PaletteMode) => ({
           transition: "background-color 0.3s ease, color 0.3s ease",
         },
         "*": {
+          transition: "background-color 0.3s ease, color 0.3s ease",
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
           transition: "background-color 0.3s ease, color 0.3s ease",
         },
       },

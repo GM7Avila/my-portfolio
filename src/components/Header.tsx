@@ -23,7 +23,10 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: theme.zIndex.drawer + 1,
-        transition: "all 0.3s ease-in-out",
+        transition: theme.transitions.create(["background-color", "color"], {
+          duration: 300,
+          easing: "ease-in-out",
+        }),
       }}
     >
       <Toolbar
