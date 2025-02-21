@@ -469,6 +469,7 @@ const Home = () => {
       </Box>
       {/*Page 2 - About*/}
       <Grid
+        id="about"
         container
         sx={{
           mt: "14vh",
