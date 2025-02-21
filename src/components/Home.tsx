@@ -1,11 +1,4 @@
-import {
-  Box,
-  Collapse,
-  Divider,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Collapse, IconButton, Tooltip, Typography } from "@mui/material";
 import "../App.css";
 import Header from "./Header";
 import Grid from "@mui/material/Grid2";
@@ -624,7 +617,12 @@ const Home = () => {
                     fontSize: { xs: "0.85em", sm: "1em" },
                     mt: 1,
                     mb: 2,
-                    paddingRight: "10em",
+                    paddingRight: {
+                      xs: "2em",
+                      md: "6em",
+                      lg: "8em",
+                      xl: "10em",
+                    },
                     color: "text.secondary",
                   }}
                 >
@@ -702,7 +700,12 @@ const Home = () => {
                   fontSize: { xs: "0.85em", sm: "1em" },
                   mt: 1,
                   mb: 2,
-                  paddingRight: "10em",
+                  paddingRight: {
+                    xs: "2em",
+                    md: "6em",
+                    lg: "8em",
+                    xl: "10em",
+                  },
                   color: "text.secondary",
                 }}
               >
