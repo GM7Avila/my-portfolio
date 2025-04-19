@@ -635,7 +635,7 @@ const Home = () => {
                     }}
                   >
                     RESTful APIs
-                  </span>
+                  </span>{" "}
                   using the{" "}
                   <span
                     style={{

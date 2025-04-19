@@ -77,7 +77,7 @@ export default function Header() {
                 sx={{
                   color: "inherit",
                   cursor: "pointer",
-                  textDecoration: "none",
+                  textDecoration: "underline",
                 }}
               >
                 <Typography
