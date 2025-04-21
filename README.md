@@ -1,32 +1,25 @@
 # Portfolio 
 
-## 🚧 Under Construction
-
 This portfolio was developed to showcase my projects and frontend development skills.
 
 - Minimalist and modern design 
 - Dark and Light themes
-- Responsive layout  
+- Responsive layout
+- Animations  
 <br>
+
 
 <div style="display: flex; gap: 20px;">
-  <img src="https://github.com/user-attachments/assets/19972aef-50ae-4ca7-97f2-40eed3933b58" alt="preview 1" width="45%">
-  <img src="https://github.com/user-attachments/assets/89f63866-9972-48a2-98fb-5d5e7d7ae093" alt="preview 2" width="45%">
+  <img src="https://i.imgur.com/SGkJNkl.png" alt="preview 1" width="45%">
+  <img src="https://i.imgur.com/Eky3s5J.png" alt="preview 2" width="45%">
 </div>
-
-<div style="display: flex; gap: 20px;">
-  <img src="https://github.com/user-attachments/assets/e30a6b00-317d-4077-b639-ef960e46d7e5" alt="preview 1" width="45%">
-  <img src="https://github.com/user-attachments/assets/ac426e71-400c-4519-b56f-6487b9353edd" alt="preview 2" width="45%">
-</div>
-
-<br>
-<hr>
-<br>
 
 ## Technologies used:
-- React with TypeScript  
-- Material UI  
-- React Icons  
+- React with TypeScript
+- Material UI
+- React Icons
+- EmailJS
+- MotionJS
 
 ## How to Run
 
@@ -47,13 +40,15 @@ cd seu-repositorio
 npm install
 ```
 
-4. Run the project:
+4. Create a .env file based on the .env.template provided in the root of the project. Then, add your EmailJS credentials:
+
+```
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+5. Run the project:
 ```
 npm run dev
 ```
-
-<br>
-<hr>
-<br>
-
-### 🚧 Coming soon with new updates!
