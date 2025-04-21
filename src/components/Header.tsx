@@ -16,12 +16,27 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const menuItems = ["About", "Portfolio", "Contact"];
+const menuItems = ["About", "Background", "Contact"];
 
 export default function Header() {
   const { theme } = useThemeContext();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = (open: boolean) => () => setDrawerOpen(open);
+
+  const handleNavigation = (sectionId: string) => {
+    const section = document.getElementById(sectionId.toLowerCase());
+    if (section) {
+      const offset = 115; // ajuste de 40px
+      const targetPosition =
+        section.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    }
+    setDrawerOpen(false);
+  };
 
   return (
     <>
@@ -79,6 +94,7 @@ export default function Header() {
                   cursor: "pointer",
                   textDecoration: "underline",
                 }}
+                onClick={() => handleNavigation(item.toLowerCase())}
               >
                 <Typography
                   variant="h6"

@@ -29,6 +29,7 @@ import {
 import { TbBrandCSharp } from "react-icons/tb";
 import { FaJava } from "react-icons/fa";
 import { useState } from "react";
+import Contact from "./Contact";
 
 const getTechIcon = (techName: string) => {
   const iconStyle = { fontSize: "1.5em" };
@@ -111,9 +112,10 @@ const Home = () => {
       }}
     >
       <Header />
-      {/*Page 1 */}
+      {/*Page 1 - About */}
       <Grid
         container
+        id="about"
         sx={{
           mt: "10vh",
           minHeight: "90vh",
@@ -263,7 +265,7 @@ const Home = () => {
                   width: "100%",
                   height: "100%",
                   borderRadius: "50%",
-                  backgroundImage: "url(https://github.com/GM7Avila.png)",
+                  backgroundImage: "url(https://i.imgur.com/YB7fGuc.jpeg)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   position: "relative",
@@ -437,6 +439,7 @@ const Home = () => {
           </Tooltip>
         </Grid>
       </Grid>
+      {/* divider */}
       <Box
         sx={{
           display: "flex",
@@ -467,9 +470,9 @@ const Home = () => {
           />
         ))}
       </Box>
-      {/*Page 2 - About*/}
+      {/*Page 2 - Background */}
       <Grid
-        id="about"
+        id="background"
         container
         sx={{
           mt: "14vh",
@@ -667,7 +670,7 @@ const Home = () => {
                   fontWeight: "bold",
                 }}
               >
-                Full Stack Dev. & Data Scientist
+                Full Stack Dev. & ML Engineer
               </Typography>
             </Box>
             <Box sx={{ display: "flex", mt: 1 }}>
@@ -737,13 +740,14 @@ const Home = () => {
                 >
                   Data Analysis
                 </span>
-                , and developing web systems applied to Artificial Intelligence
+                , and developing web systems applied to Machine Learning
                 Engineering.
               </Typography>
             </Box>
           </Collapse>
         </Grid>
 
+        {/* Grid 2 - Tecnologias */}
         <Grid
           container
           size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
@@ -815,6 +819,19 @@ const Home = () => {
           ))}
         </Grid>
       </Grid>
+      {/*Page 3 - Contact*/}
+      <Box
+        id="contact"
+        sx={{
+          mt: "14vh",
+          mb: "5em",
+          minHeight: "75vh",
+          width: "100%",
+          display: "flex",
+        }}
+      >
+        <Contact />
+      </Box>
     </Box>
   );
 };
