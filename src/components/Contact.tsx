@@ -75,8 +75,19 @@ const Contact = () => {
             required
             sx={{ mb: 3 }}
           />
-          <Button variant="contained" fullWidth type="submit">
-            Send
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={{
+              backgroundColor: "#5F5F5F",
+            }}
+          >
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "1.2em", color: "#fff" }}
+            >
+              Send
+            </Typography>
           </Button>
         </Box>
       </Grid>

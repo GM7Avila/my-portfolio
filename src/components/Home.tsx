@@ -30,6 +30,8 @@ import { TbBrandCSharp } from "react-icons/tb";
 import { FaJava } from "react-icons/fa";
 import { useState } from "react";
 import Contact from "./Contact";
+import { motion, useInView, useAnimation, stagger } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const getTechIcon = (techName: string) => {
   const iconStyle = { fontSize: "1.5em" };
@@ -99,6 +101,41 @@ const languages: LanguageType[] = [
 ];
 
 const Home = () => {
+  const mainControls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      mainControls.start("visible");
+    }
+  }, [isInView, mainControls]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5, // Reduzir o stagger para que os itens apareçam mais próximos no tempo
+        delayChildren: 1, // Reduzir o delay inicial
+        duration: 1, // Adicionar duração mais longa
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring", // Usar spring para animação mais natural
+        damping: 10, // Controlar o "rebote" da animação
+        stiffness: 100, // Controlar a rigidez da animação
+      },
+    },
+  };
+
   const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
   const circleColor = theme.palette.mode === "dark" ? "#42414c" : "#d4d4d8";
@@ -113,6 +150,7 @@ const Home = () => {
     >
       <Header />
       {/*Page 1 - About */}
+
       <Grid
         container
         id="about"
@@ -471,105 +509,196 @@ const Home = () => {
         ))}
       </Box>
       {/*Page 2 - Background */}
-      <Grid
-        id="background"
-        container
-        sx={{
-          mt: "14vh",
-          mb: "5em",
-          minHeight: "75vh",
-          width: "100%",
-        }}
+      <motion.div
+        initial="hidden"
+        animate={mainControls}
+        variants={containerVariants}
+        ref={ref}
       >
         <Grid
-          size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
+          id="background"
+          container
           sx={{
-            mt: { md: "0em", lg: "4em", xl: "4em" },
-            display: "flex",
-            flexDirection: "column",
-            paddingLeft: { md: "1em", lg: "3em", xl: "4em" },
+            mt: "14vh",
+            mb: "5em",
+            minHeight: "75vh",
+            width: "100%",
           }}
         >
-          <Typography
+          <Grid
+            size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
             sx={{
-              fontSize: { xs: "1.4em", sm: "1.8em" },
-              textDecoration: "underline",
+              mt: { md: "0em", lg: "4em", xl: "4em" },
+              display: "flex",
+              flexDirection: "column",
+              paddingLeft: { md: "1em", lg: "3em", xl: "4em" },
             }}
           >
-            Background
-          </Typography>
-
-          <Box sx={{ alignItems: "center", marginTop: "2.5em" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
-                🎓
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: "1.1em", sm: "1.5em" },
-                  fontWeight: "bold",
-                }}
-              >
-                Mechatronics Technician
-              </Typography>
-            </Box>
             <Typography
               sx={{
-                fontSize: { xs: "1em", sm: "1.25em" },
-                color: theme.palette.text.secondary,
+                fontSize: { xs: "1.4em", sm: "1.8em" },
+                textDecoration: "underline",
               }}
             >
-              Escola Técnica Pandiá Calogeras (2017-2019)
+              Background
             </Typography>
-          </Box>
 
-          <Grid sx={{ marginTop: "1em" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
-                🎓
-              </Typography>
+            <Box sx={{ alignItems: "center", marginTop: "2.5em" }}>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
+                  🎓
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1.1em", sm: "1.5em" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Mechatronics Technician
+                </Typography>
+              </Box>
               <Typography
                 sx={{
-                  fontSize: { xs: "1.1em", sm: "1.5em" },
-                  fontWeight: "bold",
+                  fontSize: { xs: "1em", sm: "1.25em" },
+                  color: theme.palette.text.secondary,
                 }}
               >
-                Computer Science Graduate
+                Escola Técnica Pandiá Calogeras (2017-2019)
               </Typography>
             </Box>
 
-            <Typography
-              sx={{
-                fontSize: { xs: "1em", sm: "1.25em" },
-                color: theme.palette.text.secondary,
-              }}
-            >
-              Universidade Veiga de Almeida (2022)
-            </Typography>
-          </Grid>
-          <Typography
-            sx={{
-              fontSize: { xs: "1.4em", sm: "1.8em" },
-              marginTop: "2.2em",
-              textDecoration: "underline",
-            }}
-          >
-            Experiences{" "}
-            <Tooltip placement="top" title="Expand">
-              <IconButton
-                onClick={() => setExpanded((prev) => !prev)}
+            <Grid sx={{ marginTop: "1em" }}>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography style={{ fontSize: "1.5em", marginRight: "0.5em" }}>
+                  🎓
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1.1em", sm: "1.5em" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Computer Science Graduate
+                </Typography>
+              </Box>
+
+              <Typography
                 sx={{
-                  ml: 1,
-                  transform: expanded ? "rotate(180deg)" : "rotate(0)",
-                  transition: "transform 0.2s",
+                  fontSize: { xs: "1em", sm: "1.25em" },
+                  color: theme.palette.text.secondary,
                 }}
               >
-                <ExpandMoreIcon />
-              </IconButton>
-            </Tooltip>
-          </Typography>
-          <Grid sx={{ marginTop: "2.5em" }}>
-            <Box>
+                Universidade Veiga de Almeida (2022)
+              </Typography>
+            </Grid>
+            <Typography
+              sx={{
+                fontSize: { xs: "1.4em", sm: "1.8em" },
+                marginTop: "2.2em",
+                textDecoration: "underline",
+              }}
+            >
+              Experiences{" "}
+              <Tooltip placement="top" title="Expand">
+                <IconButton
+                  onClick={() => setExpanded((prev) => !prev)}
+                  sx={{
+                    ml: 1,
+                    transform: expanded ? "rotate(180deg)" : "rotate(0)",
+                    transition: "transform 0.2s",
+                  }}
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </Tooltip>
+            </Typography>
+            <Grid sx={{ marginTop: "2.5em" }}>
+              <Box>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "1em", sm: "1.25em" },
+                      marginRight: "0.5em",
+                    }}
+                  >
+                    💼
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "1.1em", sm: "1.5em" },
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Backend Java Developer
+                  </Typography>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: "flex", mt: 1 }}>
+                <Box
+                  sx={{
+                    borderLeft: "1px solid #ccc",
+                    mr: 2,
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1em", sm: "1.25em" },
+                    color: theme.palette.text.secondary,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Rmax (2022-2023)
+                </Typography>
+              </Box>
+
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Box sx={{ display: "flex", mb: 5 }}>
+                  <Box
+                    sx={{
+                      borderLeft: "1px solid #ccc",
+                      mr: 2,
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "0.85em", sm: "1em" },
+                      mt: 1,
+                      mb: 2,
+                      paddingRight: {
+                        xs: "2em",
+                        md: "6em",
+                        lg: "8em",
+                        xl: "10em",
+                      },
+                      color: "text.secondary",
+                    }}
+                  >
+                    Experience in developing{" "}
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        backgroundColor: circleColor,
+                      }}
+                    >
+                      RESTful APIs
+                    </span>{" "}
+                    using the{" "}
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        backgroundColor: circleColor,
+                      }}
+                    >
+                      Spring Framework
+                    </span>
+                    , with a focus on security, JWT authentication, user
+                    services, and best coding practices.
+                  </Typography>
+                </Box>
+              </Collapse>
+            </Grid>
+            <Grid sx={{ marginTop: "2em" }}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Typography
                   sx={{
@@ -581,33 +710,31 @@ const Home = () => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.1em", sm: "1.5em" },
+                    fontSize: { xs: "0.9em", sm: "1.5em" },
                     fontWeight: "bold",
                   }}
                 >
-                  Backend Java Developer
+                  Full Stack Dev. & ML Engineer
                 </Typography>
               </Box>
-            </Box>
-
-            <Box sx={{ display: "flex", mt: 1 }}>
-              <Box
-                sx={{
-                  borderLeft: "1px solid #ccc",
-                  mr: 2,
-                }}
-              />
-              <Typography
-                sx={{
-                  fontSize: { xs: "1em", sm: "1.25em" },
-                  color: theme.palette.text.secondary,
-                  fontWeight: "bold",
-                }}
-              >
-                Rmax (2022-2023)
-              </Typography>
-            </Box>
-
+              <Box sx={{ display: "flex", mt: 1 }}>
+                <Box
+                  sx={{
+                    borderLeft: "1px solid #ccc",
+                    mr: 2,
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1em", sm: "1.25em" },
+                    color: theme.palette.text.secondary,
+                    fontWeight: "bold",
+                  }}
+                >
+                  FuzzyLab (2024)
+                </Typography>
+              </Box>
+            </Grid>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <Box sx={{ display: "flex", mb: 5 }}>
                 <Box
@@ -630,195 +757,116 @@ const Home = () => {
                     color: "text.secondary",
                   }}
                 >
-                  Experience in developing{" "}
+                  Experience in Web Development with{" "}
                   <span
                     style={{
                       fontWeight: "bold",
                       backgroundColor: circleColor,
                     }}
                   >
-                    RESTful APIs
+                    React and Django REST Framework
                   </span>{" "}
-                  using the{" "}
+                  . Skilled in implementing{" "}
                   <span
                     style={{
                       fontWeight: "bold",
                       backgroundColor: circleColor,
                     }}
                   >
-                    Spring Framework
+                    Machine Learning
+                  </span>{" "}
+                  algorithms,{" "}
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      backgroundColor: circleColor,
+                    }}
+                  >
+                    Data Analysis
                   </span>
-                  , with a focus on security, JWT authentication, user services,
-                  and best coding practices.
+                  , and developing web systems applied to Machine Learning
+                  Engineering.
                 </Typography>
               </Box>
             </Collapse>
           </Grid>
-          <Grid sx={{ marginTop: "2em" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography
-                sx={{
-                  fontSize: { xs: "1em", sm: "1.25em" },
-                  marginRight: "0.5em",
-                }}
-              >
-                💼
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: "0.9em", sm: "1.5em" },
-                  fontWeight: "bold",
-                }}
-              >
-                Full Stack Dev. & ML Engineer
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", mt: 1 }}>
-              <Box
-                sx={{
-                  borderLeft: "1px solid #ccc",
-                  mr: 2,
-                }}
-              />
-              <Typography
-                sx={{
-                  fontSize: { xs: "1em", sm: "1.25em" },
-                  color: theme.palette.text.secondary,
-                  fontWeight: "bold",
-                }}
-              >
-                FuzzyLab (2024)
-              </Typography>
-            </Box>
-          </Grid>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Box sx={{ display: "flex", mb: 5 }}>
-              <Box
-                sx={{
-                  borderLeft: "1px solid #ccc",
-                  mr: 2,
-                }}
-              />
-              <Typography
-                sx={{
-                  fontSize: { xs: "0.85em", sm: "1em" },
-                  mt: 1,
-                  mb: 2,
-                  paddingRight: {
-                    xs: "2em",
-                    md: "6em",
-                    lg: "8em",
-                    xl: "10em",
-                  },
-                  color: "text.secondary",
-                }}
-              >
-                Experience in Web Development with{" "}
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    backgroundColor: circleColor,
-                  }}
-                >
-                  React and Django REST Framework
-                </span>{" "}
-                . Skilled in implementing{" "}
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    backgroundColor: circleColor,
-                  }}
-                >
-                  Machine Learning
-                </span>{" "}
-                algorithms,{" "}
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    backgroundColor: circleColor,
-                  }}
-                >
-                  Data Analysis
-                </span>
-                , and developing web systems applied to Machine Learning
-                Engineering.
-              </Typography>
-            </Box>
-          </Collapse>
-        </Grid>
 
-        {/* Grid 2 - Tecnologias */}
-        <Grid
-          container
-          size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
-          spacing={1}
-          position={"sticky"}
-          sx={{
-            mt: { xs: "3em", lg: "0" },
-            display: "flex",
-            px: 2,
-            justifyContent: "center",
-          }}
-        >
-          {languages.map((tech, index) => (
-            <Grid
-              size={{ xs: 6, sm: 4, md: 3, lg: 3 }}
-              key={index}
-              sx={{
-                minWidth: { xs: 100, sm: 140 },
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Box
+          {/* Grid 2 - Tecnologias */}
+
+          <Grid
+            container
+            size={{ xs: 12, md: 6, lg: 6, xl: 6 }}
+            spacing={1}
+            position={"sticky"}
+            sx={{
+              mt: { xs: "3em", lg: "0" },
+              display: "flex",
+              px: 2,
+              justifyContent: "center",
+            }}
+          >
+            {languages.map((tech, index) => (
+              <Grid
+                size={{ xs: 6, sm: 4, md: 3, lg: 3 }}
+                key={index}
                 sx={{
-                  p: { xs: 0.5, sm: 1.5 },
-                  minHeight: { xs: 125, sm: 130, xl: 80 },
-                  maxHeight: { xs: 150, sm: 160, xl: 190 },
-                  width: "100%",
-                  borderRadius: 2,
-                  boxShadow:
-                    "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
+                  mt: "1em",
+                  minWidth: { xs: 100, sm: 140 },
                   display: "flex",
-                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.2s ease",
-                  "&:hover": {
-                    transform: "scale(1.03)",
-                    boxShadow:
-                      "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
-                  },
-                  bgcolor: theme.palette.cardBackground,
                 }}
               >
-                <Box
-                  sx={{
-                    fontSize: { xs: 24, sm: 25 },
-                    color:
-                      theme.palette.mode === "dark"
-                        ? "primary.light"
-                        : "primary.dark",
-                    mb: 0.5,
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{
+                    scale: 1.05,
+                    rotate: 1,
+                    transition: { duration: 0.3 },
                   }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {getTechIcon(tech.name)}
-                </Box>
+                  <Box
+                    sx={{
+                      p: { xs: 0.5, sm: 1.5 },
+                      minHeight: { xs: 125, sm: 130, xl: 80 },
+                      maxHeight: { xs: 150, sm: 160, xl: 190 },
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        fontSize: { xs: 24, sm: 25 },
+                        color:
+                          theme.palette.mode === "dark"
+                            ? "primary.light"
+                            : "primary.dark",
+                        mb: 0.5,
+                      }}
+                    >
+                      {getTechIcon(tech.name)}
+                    </Box>
 
-                <Typography
-                  sx={{
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    fontSize: { xs: "0.9rem", sm: "1rem" },
-                  }}
-                >
-                  {tech.name}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        fontSize: { xs: "0.9rem", sm: "1rem" },
+                      }}
+                    >
+                      {tech.name}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
-      </Grid>
+      </motion.div>
       {/*Page 3 - Contact*/}
       <Box
         id="contact"
