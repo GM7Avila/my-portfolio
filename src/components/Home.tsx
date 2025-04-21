@@ -104,6 +104,7 @@ const Home = () => {
   const mainControls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     if (isInView) {
@@ -879,6 +880,20 @@ const Home = () => {
         }}
       >
         <Contact />
+      </Box>
+      {/* Footer */}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "0.5em",
+          mb: "2em",
+          color: theme.palette.text.secondary,
+        }}
+      >
+        © {currentYear} Guilherme M. Avila. All rights reserved.
       </Box>
     </Box>
   );
