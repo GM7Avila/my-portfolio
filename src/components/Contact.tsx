@@ -22,13 +22,14 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "your_service_id",
-        "your_template_id",
+        process.env.REACT_APP_EMAILJS_SERVICE_ID!,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID!,
         form.current,
-        "your_public_key"
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
         setSuccess(true);
+        console.log("Message sent!");
         form.current?.reset();
       })
       .catch(() => {
